@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gini and Frances 書籍推薦</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f8f6f2;
+    }
+
+    /* Header Navigation */
+    .header-nav {
+      background: #8B4513;
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-item {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 10px 0;
+    }
+
+    .nav-item:hover {
+      color: #f4d03f;
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 5px;
+      left: 50%;
+      background: #f4d03f;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-item:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      z-index: 2;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+      opacity: 0.8;
+    }
+
+    /* Language Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 1001;
+      display: flex;
+      gap: 10px;
+    }
+
+    .lang-btn {
+      padding: 8px 16px;
+      background: #8B4513;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+      background: #f4d03f;
+      color: #8B4513;
+    }
+
+    .lang-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.8rem;
+      color: #8B4513;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 60px;
+      font-weight: 300;
+    }
+
+    /* Reader Introduction Styles */
+    .reader-intro {
+      background: #fff;
+      border-radius: 15px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      margin: 0 20px 40px 20px;
+    }
+
+    .reader-intro h3 {
+      font-size: 1.8rem;
+      color: #8B4513;
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .reader-intro p {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.8;
+      text-align: justify;
+      margin-bottom: 15px;
+    }
+
+/* Book Cards */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    .book-card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .book-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    }
+
+    .book-image {
+      width: 100%;
+      height: 250px; /* 固定圖片的高度 */
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .book-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    /* 鼠標經過時放大圖片，並確保圖片顯示完整 */
+    .book-card:hover .book-image img {
+      transform: scale(1.3); /* 放大圖片至130% */
+      object-fit: contain; /* 保證圖片完全顯示，且不被裁剪 */
+    }
+
+    .book-content {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .book-title {
+      font-size: 1.4rem;
+      color: #8B4513;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .book-description {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .book-reflection {
+      font-size: 0.95rem;
+      color: #8B4513;
+      font-style: italic;
+      border-left: 4px solid #f4d03f;
+      padding-left: 15px;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    /* Author Section */
+    .author-section {
+      background: linear-gradient(135deg, #8B4513, #A0522D);
+      color: #fff;
+      padding: 80px 20px;
+    }
+
+    .author-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .author-card {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .author-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .author-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #f4d03f;
+      text-align: center;
+    }
+
+    .author-info {
+      margin-bottom: 20px;
+    }
+
+    .author-info p {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .author-info strong {
+      color: #f4d03f;
+      font-weight: 600;
+    }
+
+    .author-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.85;
+      text-align: justify;
+    }
+
+    /* Footer */
+    .footer {
+      background: #2c1810;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Language Control */
+    .lang-hidden {
+      display: none !important;
+    }
+
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <nav class="header-nav">
+    <div class="nav-container">
+      <div class="nav-menu">
+        <a href="#readers" class="nav-item" id="nav-readers-zh">讀者介紹</a>
+        <a href="#readers" class="nav-item lang-hidden" id="nav-readers-en">Reader Introduction</a>
+        <span class="nav-separator">·</span>
+        <a href="#books" class="nav-item" id="nav-books-zh">書籍介紹</a>
+        <a href="#books" class="nav-item lang-hidden" id="nav-books-en">Book Introduction</a>
+        <span class="nav-separator">·</span>
+        <a href="#authors" class="nav-item" id="nav-authors-zh">作者介紹</a>
+        <a href="#authors" class="nav-item lang-hidden" id="nav-authors-en">Author Introduction</a>
+        <span class="nav-separator">·</span>
+      </div>
+    </div>
+  </nav>
+ 
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLanguage('zh')" id="zh-btn">中文</button>
+    <button class="lang-btn" onclick="setLanguage('en')" id="en-btn">English</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 id="hero-title-zh">韵筑和佳勳</h1>
+      <h1 id="hero-title-en" class="lang-hidden">Gini and Frances</h1>
+      <p class="hero-subtitle" id="hero-subtitle-zh">青少年書籍推薦</p>
+      <p class="hero-subtitle lang-hidden" id="hero-subtitle-en">Recommendations for Teenagers' Books</p>
+      <p class="hero-description" id="hero-desc-zh">
+    在書籍的世界裡，每一個故事都像是一杯精心調製的茶，帶著獨特的香氣與回味。<br>
+        六本書，六個人生故事。
+      </p>
+      <p class="hero-description lang-hidden" id="hero-desc-en">
+        In the world of books, every story is like a carefully brewed cup of tea, with its unique aroma and aftertaste.<br>
+        Let's taste the beauty of these words together and feel the warmth and power that reading brings.
+      </p>
+    </div>
+  </section>
+
+  <!-- Reader Introduction Section -->
+  <section id="readers" class="section">
+    <h2 class="section-title" id="readers-title-zh">讀者介紹</h2>
+    <h2 class="section-title lang-hidden" id="readers-title-en">Reader Introduction</h2>
+    <p class="section-subtitle" id="readers-subtitle-zh">韵筑和佳勳</p>
+    <p class="section-subtitle lang-hidden" id="readers-subtitle-en">About the Love and Pursuit of Reading</p>
+    
+    <div class="reader-intro">
+  <h3 id="reader2-name-zh">曾韵筑</h3>
+  <h3 id="reader2-name-en" class="lang-hidden">Gini</h3>
+  <!-- 讓圖片顯示在文字正下方 -->
+  <div class="reader-content" style="text-align: center;">
+    <img src="https://github.com/meinyu-xun/xunxun/blob/main/131426.jpg?raw=true" alt="Reader Image" class="reader-img" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-top: 20px;">
+    <p id="reader2-intro-zh">
+      我是南投人，在國立台東大學就讀，從小就很喜歡在假日去圖書館看書。我喜歡很多種類的書籍，但最愛的是奇幻小說。最想推薦給你的青少年書籍是《決戰王妃》與《牧羊少年奇幻之旅》。
+    </p>
+    <p id="reader2-intro-en" class="lang-hidden">
+      I am studying in National Taitung University. I have always loved going to the library to read books on holidays since I was a child. I like a lot of genres, but I like reading fantasy the most. The young adult books I would most like to recommend to you are The Selection and The Alchemist.
+    </p>
+  </div>
+  </div>
+    
+    <div class="reader-intro">
+  <h3 id="reader2-name-zh">葉佳勳</h3>
+  <h3 id="reader2-name-en" class="lang-hidden">Frances</h3>
+  <!-- 讓圖片顯示在文字正下方 -->
+  <div class="reader-content" style="text-align: center;">
+    <img src="https://github.com/meinyu-xun/xunxun/blob/main/131424.jpg?raw=true" alt="Reader Image" class="reader-img" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-top: 20px;">
+    <p id="reader2-intro-zh">
+      大家好~我是佳勳，也可以叫我Frances，就讀於台東大學英美語文學系。我的個性沉穩內斂，一直以來都熱愛閱讀。透過系上豐富多元的文學課程，我對文學作品及其人性方面的研究產生了濃厚的興趣。我希望在這個領域繼續學習和成長，進一步探索文學的深度和美感。
+    </p>
+    <p id="reader2-intro-en" class="lang-hidden">
+      Hello~My name is Frances. I am a student in the Department of English at National Taitung University. With a calm and introspective personality, I have always enjoyed reading. Through the department's diverse and enriching literature courses, I have developed a deep interest in literary works and the ways they reflect human experience. I hope to continue learning and growing in this field, further exploring the depth and beauty of literature.
+    </p>
+  </div>
+</div>
+
+  <!-- Books Section -->
+  <section id="books" class="section">
+    <h2 class="section-title" id="books-title-zh">書籍介紹</h2>
+    <h2 class="section-title lang-hidden" id="books-title-en">Book Introduction</h2>
+    <p class="section-subtitle" id="books-subtitle-zh">精選推薦書籍</p>
+    <p class="section-subtitle lang-hidden" id="books-subtitle-en">Selected Recommended Books</p>
+    
+    <div class="books-grid">
+      <!-- Book 1: The Selection -->
+      <div class="book-card">
+        <div class="book-image">
+          <a href="#book1" class="book-link">
+            <img src="https://github.com/meinyu-xun/xunxun/blob/main/5555.jpg?raw=true" alt="The Selection" 
+                 onerror="this.style.display='none';" />
+          </a>
+        </div>
+        <div class="book-content">
+          <h3 class="book-title" id="book1-title-zh">《決戰王妃》– 綺拉．凱斯</h3>
+          <h3 class="book-title lang-hidden" id="book1-title-en">The Selection – Kiera Cass</h3>
+          <p class="book-description" id="book1-desc-zh">
+            女主角是第五階級的階級，在這個國家想翻身就需要參加王妃徵選，女主角一步一步打動王子，晉升為決賽候選人。這是一個關於愛情、選擇與成長的故事。
+          </p>
+          <p class="book-description lang-hidden" id="book1-desc-en">
+            This is a novel with class and court as the background. It describes the story of America from the fifth class who was selected as a candidate for the princess because of her family's needs. She had to stand out among the thirty-five princess candidates. But because of America's sincerity, she won the admiration of the prince. So she was finally selected as the final six competitors.
+          </p>
+          <div class="book-reflection">
+            <p id="book1-reflect-zh"><strong>推薦語：</strong>結構如同《飢餓遊戲》，揭示階級制度的荒謬與現實。
+            <p id="book1-reflect-zh"><strong>讀後感：</strong>看完《飢餓遊戲》後，我發現它們的故事結構非常相似。宮廷競賽就像是一場生存實境秀，每位女性都想贏得王子的青睞，而整個國家的權力都掌握在皇室手中。作為讀者，我意識到這個制度有多糟糕，但當這種情況真的發生時，我們卻沒有察覺自己也成為了競爭者。我強烈推薦大家閱讀這本書。雖然大多數人可能不喜歡這個愛情故事，但我認為作者對他們糾葛與困境的描寫非常感人。</p>
+            <p class="lang-hidden" id="book1-reflect-en"><strong>Reflection:</strong> After I watched The Hunger Games, I found that their story structures are very similar. The court competition is like a reality show of survival. Every woman wants to win the favor of the prince. And the power of the whole country is in the hands of the royal family. When I am a reader, I realize how bad this system is. But when it really happens, we don't realize that we are also a contestant.
+
+I highly recommend everyone to read this book. Although most people may not like the love story, I think the author's portrayal of their entanglements and predicaments is very touching.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 2: The Alchemist -->
+      <div class="book-card">
+        <div class="book-image">
+          <a href="#book2" class="book-link">
+            <img src="https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg" alt="The Alchemist" />
+          </a>
+        </div>
+        <div class="book-content">
+          <h3 class="book-title" id="book2-title-zh">《牧羊少年奇幻之旅》– 保羅．柯里歐</h3>
+          <h3 class="book-title lang-hidden" id="book2-title-en">The Alchemist – Paulo Coelho</h3>
+          <p class="book-description" id="book2-desc-zh">
+            一本能在人生不同階段啟發心靈的哲學小說，講述一個牧羊少年尋找寶藏的奇幻旅程。
+          </p>
+          <p class="book-description lang-hidden" id="book2-desc-en">
+            This book mainly tells the story of a Spanish shepherd boy's journey to the pyramids in pursuit of his dream.
+          </p>
+          <div class="book-reflection">
+            <p id="book2-reflect-zh"><strong>推薦語：</strong>當你真心渴望某樣東西時，整個宇宙都會聯合起來幫助你。
+            <p id="book1-reflect-zh"><strong>讀後感：</strong>這本書會在不同的人生階段以不同的方式啟發你。當我在中學時讀這本書，我覺得它很抽象，不是因為文字難懂，而是因為其中的人生智慧只有在經歷過足夠的人生後才能理解。與《鬼媽媽》不同，當你是孩子時讀這本書，你會獲得啟發。我認為這本書之所以如此有力量，是因為當你讀完它後，隨著年齡的增長，你會理解更多書中的道理。「當你渴望某樣東西時，整個宇宙都會合力幫助你實現它。」這是書中最著名的一句話。我認為當你對生活感到迷茫時，不妨翻開這本書，它會給你啟發。</p>
+            <p class="lang-hidden" id="book2-reflect-en"><strong>Reflection:</strong> This book will inspire you in different ways at different stages of life. When I read it in middle school, I thought it was very abstract, not because the text was difficult, but because its life insights can only be understood after enough life experience. Unlike Coraline, you will be inspired when you read it as a child. I think the reason why this book is so powerful is that after you finish reading it, you will understand more as you grow older.
+
+"When you want something, all the universe conspires in helping you to achieve it." This is the most famous sentence in the book. I think when you feel confused about life, you might as well open this book, it will give you inspiration.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 3: The Hunger Games -->
+      <div class="book-card">
+        <div class="book-image">
+          <a href="#book3" class="book-link">
+            <img src="https://m.media-amazon.com/images/I/61JfGcL2ljL.jpg" alt="The Hunger Games" />
+          </a>
+        </div>
+        <div class="book-content">
+          <h3 class="book-title" id="book3-title-zh">《飢餓遊戲》– 蘇珊．柯林斯</h3>
+          <h3 class="book-title lang-hidden" id="book3-title-en">The Hunger Games – Suzanne Collins</h3>
+          <p class="book-description" id="book3-desc-zh">
+            設定在一個反烏托邦的世界，每年一次的飢餓遊戲選手競賽是控制人民的方式。這是反抗與覺醒的故事。
+          </p>
+          <p class="book-description lang-hidden" id="book3-desc-en">
+            Set in a dystopian world, the Hunger Games is an annual survival competition to control the population. A story about rebellion and awakening.
+          </p>
+          <div class="book-reflection">
+            <p id="book3-reflect-zh"><strong>推薦語：</strong>《飢餓遊戲》揭示了社會階級與人性。
+            <p id="book1-reflect-zh"><strong>讀後感：</strong>在我們的日常生活中，我們常常被過多的信息洗腦。我們沒有時間去思考每一條信息的正確性，經常按照上層的命令行事，無論是在家庭、公司還是社會中。但當我們開始思考時，我們就能停止被他人主導。當我們能聽從自己內心的聲音時，就不會成為別人棋盤上的一顆棋子。很多電影中也有覺醒的情節。例如，在《千與千尋》中，千尋和白龍忘記了自己的名字，他們被困在同一個地方。但當他們想起自己的目的時，他們便能逃脫這個世界。科幻電影中也有機器人覺醒的情節，當他們意識到自己不再是工具時，他們可以成為自己。覺醒在這句話中是一個非常重要的概念，當你知道自己在做什麼時，其他人就無法控制你。</p>
+            <p class="lang-hidden" id="book3-reflect-en"><strong>Reflection:</strong> In our daily lives, we are often brainwashed by too much information. We don't have time to think about the correctness of every piece of information. We often follow the orders of those above us, whether in the family, in the company, or society. But when we start to think, we can stop being dominated by others. When we can listen to our voice, we will not become a piece on someone else's chessboard. There are also many awareness plots in many movies. In Spirited Away, for example, Chihiro and Haku have forgotten their names. They are stuck in the same place. But when they remember their purpose, they can escape the world. Science fiction movies have also included the awakening of robots, when they realize that they are no longer tools, they can be themselves. Awakening is a very important concept in this sentence. When you know what you are doing, others cannot control you.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 4: Coraline -->
+      <div class="book-card">
+        <div class="book-image">
+          <a href="#book4" class="book-link">
+            <img src="https://github.com/meinyu-xun/xunxun/blob/main/2222.jpg?raw=true" alt="Coraline" />
+          </a>
+        </div>
+        <div class="book-content">
+          <h3 class="book-title" id="book4-title-zh">《鬼媽媽》– 尼爾．蓋曼</h3>
+          <h3 class="book-title lang-hidden" id="book4-title-en">Coraline – Neil Gaiman</h3>
+          <p class="book-description" id="book4-desc-zh">
+            卡洛琳一直缺乏成年人的陪伴。她很難理解成年人的行為。卡洛琳和其他孩子一樣，渴望父母的關愛。她希望每個人都能珍惜自己，而不是敷衍地對待她。因為沒有人關心她，沒有人引導她，卡洛琳總是獨自去冒險。正因如此，卡洛琳打開了那扇無法打開的門。
+          </p>
+          <p class="book-description lang-hidden" id="book4-desc-en">
+           Coraline has always lacked the company of adults. Coraline finds it is hard to understand adult's behaviors. Coraline is just like any other child, she desires the care and affection from her parents. She hopes that everyone can value herself instead of treating her perfunctorily. Because no one cared about her or guided her, Coraline always went on adventures alone. That's why Coraline opened the door that cannot be opened.
+          </p>
+          <div class="book-reflection">
+            <p id="book4-reflect-zh"><strong>推薦語：</strong>童年不該是寂寞無趣的。
+            <p id="book1-reflect-zh"><strong>讀後感：</strong>當我和《卡羅琳》中的年齡差不多時，我也住在奶奶家。因為我的父母都在工作，除了奶奶，沒有人能照顧我。我就像卡羅琳一樣，對一切充滿好奇，經常去鄰居的煙草房探險。我也常常走到後花園的小徑。看完《龍貓》後，我總是幻想能夠進入一個幻想的世界。當孩子缺乏真實的陪伴時，他們總是會尋找外在的東西。如果大人能夠站在孩子的角度來思考，從孩子的視角與他們溝通，對雙方都會更有益。我認為孩子的好奇心並沒有錯，有時候孩子只是需要大人的陪伴，而大人卻總是責怪孩子犯錯。每個人曾經都是孩子，應該讓孩子去探索世界，父母也應該提供陪伴和支持。</p>
+            <p class="lang-hidden" id="book4-reflect-en"><strong>Reflection:</strong> When I was about the same age as Coraline, I spent it at my grandma's house. Because both my parents are working, no one can take care of me except my grandma. I'm just like Coraline, curious about everything, and often go to the neighbor's tobacco house to explore. I also usually go to the path in the back garden. After watching Totoro, I always imagine being able to enter a fantasy world. When children lack real company, they always look for external things. If adults can put themselves in the children's shoes. Communicating with children from a child's perspective will be better for both sides. I think there is nothing wrong with children being curious. Sometimes children just need the company of adults, but adults keep blaming children for making mistakes. Everyone was once a child, and children should be allowed to explore the world. Parents should also provide companionship and support.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 5: The Book Thief -->
+      <div class="book-card">
+        <div class="book-image">
+          <a href="#book5" class="book-link">
+            <img src="https://github.com/meinyu-xun/xunxun/blob/main/34567.jpg?raw=true" alt="The Book Thief" />
+          </a>
+        </div>
+        <div class="book-content">
+          <h3 class="book-title" id="book5-title-zh">《偷書賊》– 馬克斯．蘇薩克</h3>
+          <h3 class="book-title lang-hidden" id="book5-title-en">The Book Thief – Markus Zusak</h3>
+          <p class="book-description" id="book5-desc-zh">
+            這是一個關於一個女孩如何在貧困和戰亂中掙扎的故事，她透過閱讀，在如此嚴酷的境遇中，保持內心的希望和能量。除了保持內心的堅強，我們也看到她如何運用閱讀的力量，為身邊需要精神支持的人帶來溫暖的希望和力量。
+          </p>
+          <p class="book-description lang-hidden" id="book5-desc-en">
+           This is a story about how a girl lives in poverty and war, and how she keeps her mind with hope and energy in such a harsh situation through reading. In addition to keeping her mind strong, we can also see that she uses the power of reading to bring warmth to those around her who require mental support…
+          </p>
+          <div class="book-reflection">
+            <p id="book5-reflect-zh"><strong>推薦語：</strong>我曾厭惡過這些話，也曾經接受過，我希望我已經正確地理解了它們。
+            <p id="book1-reflect-zh"><strong>讀後感：</strong>讀完這本書後，我意識到這是我第一次真正感受到語言的力量。隨著女孩的成長，她所學到的所有詞語成為了她的武器，保護她並幫助她保持內心的平靜。即使在我們這一代，要讓自己的心靈遠離噪音也很難，更不用說像她那樣的處境了。這個故事讓我開始相信語言的力量，並激勵我去學習更多，希望能找到屬於自己的內心平靜。</p>
+            <p class="lang-hidden" id="book5-reflect-en"><strong>Reflection:</strong> After reading the book, I realized that it was the first time I truly felt the power of words. As the girl grew up, all the words she learned became her weapons, protecting her and helping her maintain inner peace. Even in our generation, it's hard to keep your mind away from the noises, not to mention in a situation like hers. This story made me start believing in the power of words and inspired me to acquire more, in the hope of finding my own inner peace.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Book 6: Frankenstein -->
+      <div class="book-card">
+        <div class="book-image">
+          <a href="#book6" class="book-link">
+            <img src="https://github.com/meinyu-xun/xunxun/blob/main/2345678.jpg?raw=true" alt="Frankenstein" />
+          </a>
+        </div>
+        <div class="book-content">
+          <h3 class="book-title" id="book6-title-zh">《科學怪人》– 瑪麗．雪萊</h3>
+          <h3 class="book-title lang-hidden" id="book6-title-en">Frankenstein – Mary Shelley</h3>
+          <p class="book-description" id="book6-desc-zh">
+            這是一個關於一位科學家試圖將他的實驗變成現實，最終釀成悲劇的故事。他因為自己的野心，創造了一個真實的怪物。雖然最終他感到後悔，但一切都已經發生，無法挽回。
+          </p>
+          <p class="book-description lang-hidden" id="book5-desc-en">
+           This is a story about a scientist who tries to turn his experiment into reality, which ultimately results in a serious tragedy. Because of his ambition, he creates a real-life monster. Although he feels regretful in the end, but everything has already changed and become irretrievable.
+
+          </p>
+          <div class="book-reflection">
+            <p id="book5-reflect-zh"><strong>推薦語：</strong>從我身上學習，如果不能從我的教義中學習，至少可以從我的例子中學習，獲取知識是多麼危險。
+            <p id="book1-reflect-zh"><strong>讀後感：</strong>通過這本小說，我學到了控制慾望並對我們所犯的錯誤負責的重要性。我覺得故事中的整個悲劇來自於科學家的慾望。當事情失控時，他選擇放棄並以冷漠回應。我相信，如果他至少考慮過他的家人和他所創造的怪物的處境，結果不會那麼糟糕。科學家經歷的一切提供了重要的教訓，我們應該在自己的生活中加以反思。</p>
+            <p class="lang-hidden" id="book5-reflect-en"><strong>Reflection:</strong> I learn how important it is to  control our desires and take responsibility for the mistakes we’ve made through this novel. I felt that the entire tragedy in the story came from the scientist’s desire. When things got out of control, he just chose to give up and responded with apathy. I believe that if he had at least thought about his family and the situation of the monster he created, the result would not be that bad. Everything the scientist went through offers important lessons that we should reflect on in our own lives.</p>
+          </div>
+        </div>
+      </div>
+
+           <!-- Add Books 4-6 similarly -->
+<!-- Author Introduction Section -->
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>書籍推薦</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Microsoft JhengHei', '微軟正黑體', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f8f6f2;
+    }
+
+    /* Header Navigation */
+    .header-nav {
+      background: #8B4513;
+      padding: 15px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-item {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 10px 0;
+    }
+
+    .nav-item:hover {
+      color: #f4d03f;
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 5px;
+      left: 50%;
+      background: #f4d03f;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-item:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      z-index: 2;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+      opacity: 0.8;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.8rem;
+      color: #8B4513;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 60px;
+      font-weight: 300;
+    }
+
+    /* Author Section */
+    .author-section {
+      background: linear-gradient(135deg, #8B4513, #A0522D);
+      color: #fff;
+      padding: 80px 20px;
+    }
+
+    .author-grid {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+
+    .author-card {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+      width: 300px;
+    }
+
+    .author-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .author-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #8B4513;
+      text-align: center;
+    }
+
+    .author-info {
+      margin-bottom: 20px;
+    }
+
+    .author-info p {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .author-info strong {
+      color: #f4d03f;
+      font-weight: 600;
+    }
+
+    .author-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.85;
+      text-align: justify;
+    }
+
+    /* Footer */
+    .footer {
+      background: #2c1810;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Language Control */
+    .lang-hidden {
+      display: none !important;
+    }
+
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header Navigation -->
+  <nav class="header-nav">
+    <div class="nav-container">
+      <div class="nav-menu">
+        <a href="#readers" class="nav-item" id="nav-readers-zh">讀者介紹</a>
+        <a href="#readers" class="nav-item lang-hidden" id="nav-readers-en">Reader Introduction</a>
+        <span class="nav-separator">·</span>
+        <a href="#books" class="nav-item" id="nav-books-zh">書籍介紹</a>
+        <a href="#books" class="nav-item lang-hidden" id="nav-books-en">Book Introduction</a>
+        <span class="nav-separator">·</span>
+        <a href="#authors" class="nav-item" id="nav-authors-zh">作者介紹</a>
+        <a href="#authors" class="nav-item lang-hidden" id="nav-authors-en">Author Introduction</a>
+        <span class="nav-separator">·</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLanguage('zh')" id="zh-btn">中文</button>
+    <button class="lang-btn" onclick="setLanguage('en')" id="en-btn">English</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 id="hero-title-zh">韵筑和佳勳</h1>
+      <h1 id="hero-title-en" class="lang-hidden">Gini and Frances</h1>
+      <p class="hero-subtitle" id="hero-subtitle-zh">青少年書籍推薦</p>
+      <p class="hero-subtitle lang-hidden" id="hero-subtitle-en">Recommendations for Teenagers' Books</p>
+      <p class="hero-description" id="hero-desc-zh">
+        在書籍的世界裡，每一個故事都像是一杯精心調製的茶，帶著獨特的香氣與回味。<br>
+        六本書，六個人生故事。
+      </p>
+      <p class="hero-description lang-hidden" id="hero-desc-en">
+        In the world of books, every story is like a carefully brewed cup of tea, with its unique aroma and aftertaste.<br>
+        Let's taste the beauty of these words together and feel the warmth and power that reading brings.
+      </p>
+    </div>
+  </section>
+
+  <!-- Author Introduction Section -->
+  <section id="authors" class="section">
+    <h2 class="section-title" id="authors-title-zh">作者介紹</h2>
+    <h2 class="section-title lang-hidden" id="authors-title-en">Author Introduction</h2>
+    <p class="section-subtitle" id="authors-subtitle-zh">探索每一位作者的精彩故事</p>
+    <p class="section-subtitle lang-hidden" id="authors-subtitle-en">Discover the Fascinating Stories of Each Author</p>
+    
+    <div class="author-grid">
+      <!-- Author 1: Kiera Cass -->
+      <div class="author-card" id="author1">
+         <img src="https://github.com/meinyu-xun/xunxun/blob/main/kiera.jpg?raw=true" alt="Reader Image" class="reader-img" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-top: 20px;">
+    <p id="reader2-intro-zh">
+        <h3 class="section-title" id="authors-title-zh">綺拉．凱斯</h3>
+        <h3 class="section-title lang-hidden" id="authors-title-en">Kiera Cass</h3>
+        <div class="author-info">
+          <p class="section-subtitle" id="author-info-zh"><strong>國籍：</strong> 南卡羅來納州</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Nationality:</strong>
+          South Carolina</p>
+          <p class="section-subtitle" id="author-info-zh"><strong>職業：</strong> 美國青年小說作家</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Profession:</strong> American writer of young adult fiction</p>
+        </div>
+        <p id="author-info-zh">綺拉．凱斯是一位美國作家，最著名的作品是《決戰王妃》系列。她的寫作風格深受青少年讀者的喜愛</p>
+        <p lang-hidden id="author-info-en">Kiera Cass is an American writer. She best known for The Selection series. She graduated from Radford with a degree in History and art.</p>
+      </div>
+
+      <!-- Author 2: Paulo Coelho -->
+      <div class="author-card" id="author2">
+         <img src="https://github.com/meinyu-xun/xunxun/blob/main/Paulo.jpg?raw=true" alt="Reader Image" class="reader-img" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-top: 20px;">
+    <p id="reader2-intro-zh">
+       <h3 class="section-title" id="authors-title-zh">保羅．柯里歐</h3>
+       <h3 class="section-title lang-hidden" id="authors-title-en">Paulo Coelho</h3>
+        <div class="author-info">
+          <p class="section-subtitle" id="author-info-zh"><strong>國籍：</strong> 巴西</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Nationality:</strong>
+          Brazil</p>
+          <p class="section-subtitle" id="author-info-zh"><strong>職業：</strong> 作詞人、作家</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Profession:</strong>     Lyricist, Writer</p>
+        </div>
+        <p id="author-info-zh">保羅．柯里歐是一位國際知名的巴西作家，最著名的作品是《牧羊少年奇幻之旅》。</p>
+        <p lang-hidden id="author-info-en">The Alchemist became an international best-seller.The beginning of this book originated from a feather.</p>
+      </div>
+
+      <!-- Author 3: Suzanne Collins -->
+      <div class="author-card" id="author3">
+        <img src="https://github.com/meinyu-xun/xunxun/blob/main/Suzanne.jpg?raw=true" alt="Reader Image" class="reader-img" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-top: 20px;">
+    <p id="reader2-intro-zh">
+        <h3 class="section-title" id="authors-title-zh">蘇珊．柯林斯</h3>
+       <h3 class="section-title lang-hidden" id="authors-title-en">Suzanne Collins</h3>
+        <div class="author-info">
+          <p class="section-subtitle" id="author-info-zh"><strong>國籍：</strong> 美國</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Nationality:</strong>
+          American</p>
+          <p class="section-subtitle" id="author-info-zh"><strong>職業：</strong> 女性電視編劇和小說家</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Profession:</strong> American author and television writer</p>
+        </div>
+        <p id="author-info-zh">蘇珊的父親曾是美國空軍軍官，她的作品《飢餓遊戲》探討了階級與社會問題。</p>
+        <p lang-hidden id="author-info-en">Her father was an officer in the United States Air Force and served in the Korean and Vietnam Wars. The Hunger Games was inspired in part by Greek mythology and also by her father's time in the Air Force, which gave her a deeper understanding of the effects of poverty, hunger and war.</p>
+      </div>
+
+      <!-- Author 4: Neil Gaiman -->
+      <div class="author-card" id="author4">
+        <img src="https://github.com/meinyu-xun/xunxun/blob/main/Neil%20Gaiman.jpg?raw=true" alt="Reader Image" class="reader-img" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-top: 20px;">
+    <p id="reader2-intro-zh">
+        <h3 class="section-title" id="authors-title-zh">尼爾．蓋曼</h3>
+       <h3 class="section-title lang-hidden" id="authors-title-en">Neil Gaiman</h3>
+        <div class="author-info">
+          <p class="section-subtitle" id="author-info-zh"><strong>國籍：</strong> 英國</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Nationality:</strong>
+          American</p>
+          <p class="section-subtitle" id="author-info-zh"><strong>職業：</strong> 作家、編劇、配音員</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Profession:</strong> Comic book writer, Screenwriter, Voice actor</p>
+        </div>
+        <p id="author-info-zh">尼爾．蓋曼是一位知名的英國作家，擅長奇幻和科幻小說，他的作品《美國眾神》在全球取得了巨大成功。</p>
+        <p lang-hidden id="author-info-en">Gaiman has mentioned several writers who have influenced him. Including Mary Shelley and Edgar Allan Poe. The types of reading she did also influenced the subject matter and direction of his writing.</p>
+      </div>
+
+      <!-- Author 5: Markus Zusak -->
+      <div class="author-card" id="author5">
+        <img src="https://github.com/meinyu-xun/xunxun/blob/main/Markus.jpg?raw=true" alt="Reader Image" class="reader-img" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-top: 20px;">
+    <p id="reader2-intro-zh">
+        <h3 class="section-title" id="authors-title-zh">馬庫斯．祖薩克</h3>
+       <h3 class="section-title lang-hidden" id="authors-title-en">Markus Zusak</h3>
+        <div class="author-info">
+          <p class="section-subtitle" id="author-info-zh"><strong>國籍：</strong> 澳大利亞</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Nationality:</strong>
+          Australia</p>
+          <p class="section-subtitle" id="author-info-zh"><strong>職業：</strong> 小說家</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Profession:</strong> Novelist</p>
+        </div>
+        <p id="author-info-zh">馬庫斯．祖薩克出生於奧地利父親和德國母親家庭，從小在雙語環境中長大，他的歐洲血統對他的故事講述有深遠的影響，尤其是在《偷書賊》的主題和背景設置上。</p>
+        <p lang-hidden id="author-info-en">Born to an Austrian father and a German mother, Zusak grew up in a bilingual household, and his European heritage has deeply influenced his storytelling, especially the themes and setting of The Book Thief.</p>
+      </div>
+
+      <!-- Author 6: Mary Wollstonecraft Shelley -->
+      <div class="author-card" id="author6">
+        <img src="https://github.com/meinyu-xun/xunxun/blob/main/Shelley.jpeg?raw=true" alt="Reader Image" class="reader-img" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-top: 20px;">
+    <p id="reader2-intro-zh">
+        <h3 class="section-title" id="authors-title-zh">瑪麗．雪萊</h3>
+       <h3 class="section-title lang-hidden" id="authors-title-en">Mary Wollstonecraft Shelley</h3>
+        <div class="author-info">
+          <p class="section-subtitle" id="author-info-zh"><strong>國籍：</strong> 英國</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Nationality:</strong>
+          American</p>
+          <p class="section-subtitle" id="author-info-zh"><strong>職業：</strong> 小說家</p>
+          <p class="section-subtitle lang-hidden" id="author-info-en"><strong>Profession:</strong> Novelist</p>
+        </div>
+        <p id="author-info-zh">她創作了《現代普羅米修斯》（1818），被認為是科幻小說的早期範例。她還編輯並推廣了她丈夫，浪漫主義詩人和哲學家珀西·比希·雪萊的作品。
+</p>
+        <p lang-hidden id="author-info-en">She was an English novelist who wrote The Modern Prometheus (1818), which is considered an early example of science fiction. She also edited and promoted the works of her husband, the Romantic poet and philosopher Percy Bysshe Shelley.</p>
+      </div>
+    </div>
+  </section>
+
+  
+
+
+  <script>
+    function setLanguage(lang) {
+      // 移除所有按鈕的 active 類別
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // 為當前語言按鈕添加 active 類別
+      document.getElementById(lang + '-btn').classList.add('active');
+      
+      // 隱藏所有語言元素
+      document.querySelectorAll('[id*="-en"], [id*="-zh"]').forEach(el => {
+        el.classList.add('lang-hidden');
+      });
+      
+      // 顯示選擇的語言
+      document.querySelectorAll('[id*="-' + lang + '"]').forEach(el => {
+        el.classList.remove('lang-hidden');
+      });
+    }
+    
+    // 頁面載入完成後設定預設語言
+    window.addEventListener('load', function() {
+      setLanguage('zh');
+    });
+  </script>
+
+</body>
