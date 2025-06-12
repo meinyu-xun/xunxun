@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations for Teenagers' Books</title>
+    <title>Gini, Frances</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8B0000, #B22222);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-section {
+            padding: 80px 0;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: 1.3rem;
+            color: #8B0000;
+            font-style: italic;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .author-section {
+            background-color: white;
+            padding: 60px 0;
+            border-top: 3px solid #8B0000;
+        }
+
+        .authors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .author-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.1);
+            border: 1px solid rgba(139, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .author-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.15);
+        }
+
+        .author-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #8B0000, #B22222);
+        }
+
+        .author-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .author-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .author-name {
+            color: #8B0000;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .author-bio-chinese {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #8B0000;
+            font-weight: 500;
+        }
+
+        .author-bio {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .book-authors-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+        }
+
+        .book-author-card {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.08);
+            border: 1px solid rgba(139, 0, 0, 0.1);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .book-author-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(139, 0, 0, 0.12);
+        }
+
+        .book-author-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, #8B0000, #B22222);
+        }
+
+        .book-author-name {
+            color: #8B0000;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .book-author-dates {
+            color: #666;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .book-author-bio {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .books-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8B0000;
+            margin-bottom: 60px;
+            font-weight: 300;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #8B0000, #B22222);
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, #8B0000, #B22222);
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.15);
+        }
+
+        .book-author {
+            color: #666;
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .book-title {
+            color: #8B0000;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .book-description {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .book-quote {
+            font-style: italic;
+            color: #8B0000;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #8B0000;
+            background-color: rgba(139, 0, 0, 0.05);
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+
+        .book-reflection {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        footer {
+            background-color: #8B0000;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .book-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .authors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .author-card, .book-author-card {
+                padding: 25px;
+            }
+            
+            .book-card {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Recommendations for Teenagers' Books- Six books. Six stories.</h1>
+            <p class="subtitle">In the world of books, every story is like a carefully brewed cup of tea, with its unique aroma and aftertaste.</p>
+            <p class="subtitle">We drink the tea and tell you.</p>
+        </div>
+    </header>
+
+    <section class="intro-section">
+        <div class="container">
+            <p class="intro-text">Let's taste the beauty of these words together and feel the warmth and power that reading brings.</p>
+        </div>
+    </section>
+
+    <section class="author-section">
+        <div class="container">
+            <h2 class="section-title">Reader Introduction 讀者介紹</h2>
+            <div class="authors-grid">
+                <div class="author-card">
+                    <h2 class="author-name">關於韵筑 About Gini</h2>
+                    <p class="author-bio-chinese">我是韵筑，我的英文名是Gini。目前是台東大學英美語文學系的大四生。我平時的興趣是聽歌，跳舞和看書。我喜歡閱讀懸疑偵探類和奇幻類小說。透過四年來充實的文學課程，我對文學的閱讀更加廣泛，不再只是讀我喜歡的類型。我想跟大家分享我很喜歡的兩本青少年讀物The Selection決戰王妃和The Alchemist牧羊少年奇幻之旅，希望大家閱讀後也能很有收穫。</p>
+                    <p class="author-bio">I am Gini. I am studying in National Taitung University. I have always loved going to the library to read books on holidays since I was a child. I like a lot of genres, but I like reading fantasy the most.The young adult books I would most like to recommend to you are The Selection and The Alchemist.</p>
+                </div>
+                
+                <div class="author-card">
+                    <h2 class="author-name">關於佳勳 About Frances</h2>
+                    <p class="author-bio-chinese">大家好~我是佳勳，也可以叫我Frances，就讀於台東大學英美語文學系。我的個性沉穩內斂，一直以來都熱愛閱讀。透過系上豐富多元的文學課程，我對文學作品及其人性方面的研究產生了濃厚的興趣。我希望在這個領域繼續學習和成長，進一步探索文學的深度和美感。</p>
+                    <p class="author-bio">Hello~ my name is Frances. I am a student in the Department of English at National Taitung University. With a calm and introspective personality, I have always enjoyed reading. Through the department's diverse and enriching literature courses, I have developed a deep interest in literary works and the ways they reflect human experience. I hope to continue learning and growing in this field, further exploring the depth and beauty of literature.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="book-authors-section">
+        <div class="container">
+            <h2 class="section-title">Book Authors作者介紹</h2>
+            
+            <div class="book-author-card">
+                <h3 class="book-author-name">Kiera Cass</h3>
+                <p class="book-author-dates">Born August 19, 1981</p>
+                <p class="book-author-bio">Kiera Cass is an American writer known for her young adult fiction, particularly The Selection series. Born and raised in South Carolina, she graduated from Radford University with a degree in History. Before becoming a full-time author, she worked various jobs including photography and waitressing. Her breakthrough came with The Selection (2012), which became a New York Times bestseller and spawned a successful five-book series. Cass is known for her ability to blend romance, dystopian elements, and social commentary in ways that resonate with teenage readers. She often explores themes of class inequality, personal choice, and the power of love to transcend social barriers.</p>
+            </div>
+
+            <div class="book-author-card">
+                <h3 class="book-author-name">Paulo Coelho</h3>
+                <p class="book-author-dates">Born August 24, 1947</p>
+                <p class="book-author-bio">Paulo Coelho is a Brazilian lyricist and novelist, best known for his international bestseller The Alchemist. Born in Rio de Janeiro, he initially pursued a career in journalism and songwriting before turning to literature. His early life was marked by rebellion against conventional expectations, including brief institutionalization and involvement in the counterculture movement. The Alchemist, published in 1988, has sold over 150 million copies worldwide and has been translated into 80 languages, making it one of the best-selling books in history. Coelho's writing style is characterized by simple, direct prose that conveys profound spiritual and philosophical insights. His works often explore themes of destiny, personal legend, and the interconnectedness of all things.</p>
+            </div>
+
+            <div class="book-author-card">
+                <h3 class="book-author-name">Suzanne Collins</h3>
+                <p class="book-author-dates">Born August 10, 1962</p>
+                <p class="book-author-bio">Suzanne Collins is an American television writer and author, best known for The Hunger Games trilogy. Born in Hartford, Connecticut, she is the daughter of a U.S. Air Force officer, which meant frequent moves during her childhood. She graduated from Indiana University with a degree in Theater Arts and later earned an MFA in Dramatic Writing from New York University. Collins began her career writing for children's television shows, including Clarissa Explains It All and The Mystery Files of Shelby Woo. Her experience in television storytelling greatly influenced her writing style, particularly her mastery of pacing and visual narrative. The Hunger Games trilogy, published between 2008-2010, became a cultural phenomenon, selling over 100 million copies worldwide and inspiring a successful film franchise. Collins skillfully weaves themes of war, survival, media manipulation, and political resistance into compelling narratives that speak to both young adult and adult audiences.</p>
+            </div>
+
+            <div class="book-author-card">
+                <h3 class="book-author-name">Neil Gaiman</h3>
+                <p class="book-author-dates">Born November 10, 1960</p>
+                <p class="book-author-bio">Neil Gaiman is a British author known for his work in fantasy, horror, and graphic novels. Born in Portchester, Hampshire, he began his career as a journalist and book reviewer before transitioning to fiction writing. Gaiman gained international recognition with The Sandman comic book series, which redefined the graphic novel medium and earned numerous awards. His novels, including American Gods, Good Omens (co-written with Terry Pratchett), and Coraline, have garnered critical acclaim and popular success. Coraline, published in 2002, won the Hugo, Nebula, and Bram Stoker awards, and was adapted into a successful animated film. Gaiman's writing is characterized by its blend of mythology, fairy tale elements, and contemporary settings. He has a unique ability to create stories that work on multiple levels, appealing to both children and adults while exploring deep themes of identity, belonging, and the power of storytelling itself.</p>
+            </div>
+
+            <div class="book-author-card">
+                <h3 class="book-author-name">Markus Zusak</h3>
+                <p class="book-author-dates">Born June 23, 1975</p>
+                <p class="book-author-bio">Markus Zusak is an Australian writer known for his young adult and historical fiction. Born in Sydney to German and Austrian immigrant parents, Zusak grew up hearing stories about his parents' experiences during World War II, which later influenced his most famous work. He began writing in his teens and published his first book, The Underdog, at age 24. The Book Thief, published in 2005, became his breakthrough novel, spending over 230 weeks on the New York Times bestseller list and winning numerous international awards. The novel's unique narrative perspective—told by Death himself—and its exploration of the power of words during wartime resonated with readers worldwide. Zusak's writing is characterized by poetic language, unconventional narrative techniques, and deep emotional resonance. He often explores themes of mortality, the human capacity for both cruelty and kindness, and the transformative power of literature and storytelling.</p>
+            </div>
+
+            <div class="book-author-card">
+                <h3 class="book-author-name">Mary Shelley</h3>
+                <p class="book-author-dates">August 30, 1797 – February 1, 1851</p>
+                <p class="book-author-bio">Mary Wollstonecraft Shelley was an English novelist best known for her Gothic novel Frankenstein, widely considered one of the first works of science fiction. Born in London, she was the daughter of political philosopher William Godwin and feminist writer Mary Wollstonecraft. Tragically, her mother died shortly after her birth. At age 16, she began a relationship with the Romantic poet Percy Bysshe Shelley, whom she later married. The idea for Frankenstein came to her during the famous summer of 1816 at Lake Geneva, when she, Percy Shelley, Lord Byron, and others challenged each other to write ghost stories. She was only 18 when she began writing Frankenstein, which was published anonymously in 1818. The novel explores themes of scientific ethics, creation and responsibility, and the nature of humanity itself. Shelley's work was groundbreaking not only for its innovative genre-blending but also for its complex moral and philosophical questions that remain relevant today. Beyond Frankenstein, she wrote several other novels and worked to preserve and promote her late husband's poetry after his death in 1822.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="books-section">
+        <div class="container">
+            <h2 class="section-title">Six Recommended Books 推薦讀物，推薦語</h2>
+            
+            <div class="book-grid">
+                <div class="book-card">
+                    <h3 class="book-title">The Selection</h3>
+                    <p class="book-author">by Kiera Cass</p>
+                    <p class="book-description">This is a novel with class and court as the background. It describes the story of America from the fifth class who was selected as a candidate for the princess because of her family's needs. She had to stand out among the thirty-five princess candidates. But because of America's sincerity, she won the admiration of the prince. So she was finally selected as the final six competitors.</p>
+                    <div class="book-quote">After I watched The Hunger Games, I found that their story structures are very similar.</div>
+                    <p class="book-reflection">The court competition is like a reality show of survival. Every woman wants to win the favor of the prince. And the power of the whole country is in the hands of the royal family. When I am a reader, I realize how bad this system is. But when it really happens, we don't realize that we are also a contestant. I highly recommend everyone to read this book.</p>
+                </div>
+
+                <div class="book-card">
+                    <h3 class="book-title">The Alchemist</h3>
+                    <p class="book-author">by Paulo Coelho</p>
+                    <p class="book-description">This book mainly tells the story of a Spanish shepherd boy's journey to the pyramids in pursuit of his dream.</p>
+                    <div class="book-quote">"When you want something, all the universe conspires in helping you to achieve it."</div>
+                    <p class="book-reflection">This book will inspire you in different ways at different stages of life. When I read it in middle school, I thought it was very abstract, not because the text was difficult, but because its life insights can only be understood after enough life experience. I think when you feel confused about life, you might as well open this book, it will give you inspiration.</p>
+                </div>
+
+                <div class="book-card">
+                    <h3 class="book-title">The Hunger Games</h3>
+                    <p class="book-author">by Suzanne Collins</p>
+                    <p class="book-description">Set in a dystopian world, the Hunger Games is an annual survival competition to control the population. A story about rebellion and awakening.</p>
+                    <div class="book-quote">Awakening is a very important concept in this story.</div>
+                    <p class="book-reflection">In our daily lives, we are often brainwashed by too much information. We don't have time to think about the correctness of every piece of information. But when we start to think, we can stop being dominated by others. When we can listen to our voice, we will not become a piece on someone else's chessboard. When you know what you are doing, others cannot control you.</p>
+                </div>
+
+                <div class="book-card">
+                    <h3 class="book-title">Coraline</h3>
+                    <p class="book-author">by Neil Gaiman</p>
+                    <p class="book-description">Coraline has always lacked the company of adults. Coraline finds it is hard to understand adult's behaviors. Coraline is just like any other child, she desires the care and affection from her parents. She hopes that everyone can value herself instead of treating her perfunctorily. Because no one cared about her or guided her, Coraline always went on adventures alone.</p>
+                    <div class="book-quote">Childhood shouldn't be lonely and boring.</div>
+                    <p class="book-reflection">When children lack real company, they always look for external things. If adults can put themselves in the children's shoes, communicating with children from a child's perspective will be better for both sides. I think there is nothing wrong with children being curious. Everyone was once a child, and children should be allowed to explore the world.</p>
+                </div>
+
+                <div class="book-card">
+                    <h3 class="book-title">The Book Thief</h3>
+                    <p class="book-author">by Markus Zusak</p>
+                    <p class="book-description">This is a story about how a girl lives in poverty and war, and how she keeps her mind with hope and energy in such a harsh situation through reading. In addition to keeping her mind strong, we can also see that she uses the power of reading to bring warmth to those around her who require mental support.</p>
+                    <div class="book-quote">"I have hated the words and I have loved them, and I hope I have made them right."</div>
+                    <p class="book-reflection">After reading the book, I realized that it was the first time I truly felt the power of words. As the girl grew up, all the words she learned became her weapons, protecting her and helping her maintain inner peace. This story made me start believing in the power of words and inspired me to acquire more, in the hope of finding my own inner peace.</p>
+                </div>
+
+                <div class="book-card">
+                    <h3 class="book-title">Frankenstein</h3>
+                    <p class="book-author">by Mary Shelley</p>
+                    <p class="book-description">This is a story about a scientist who tries to turn his experiment into reality, which ultimately results in a serious tragedy. Because of his ambition, he creates a real-life monster. Although he feels regretful in the end, but everything has already changed and become irretrievable.</p>
+                    <div class="book-quote">"Learn from me, if not by my precepts, at least by my example, how dangerous is the acquirement of knowledge."</div>
+                    <p class="book-reflection">I learn how important it is to control our desires and take responsibility for the mistakes we've made through this novel. I felt that the entire tragedy in the story came from the scientist's desire. Everything the scientist went through offers important lessons that we should reflect on in our own lives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">Let's taste the beauty of these words together and feel the warmth and power that reading brings.</p>
+        </div>
+    </footer>
+</body>
+</html>
