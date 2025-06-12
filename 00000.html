@@ -76,6 +76,76 @@
       width: 100%;
     }
 
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      z-index: 2;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+      opacity: 0.8;
+    }
+
+    /* Language Toggle */
+    .lang-toggle {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 1001;
+      display: flex;
+      gap: 10px;
+    }
+
+    .lang-btn {
+      padding: 8px 16px;
+      background: #8B4513;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+      background: #f4d03f;
+      color: #8B4513;
+    }
+
+    .lang-btn:hover {
+      transform: translateY(-2px);
+    }
+
     /* Section Styles */
     .section {
       padding: 80px 0;
@@ -109,9 +179,6 @@
       margin-bottom: 30px;
       box-shadow: 0 15px 40px rgba(0,0,0,0.1);
       margin: 0 20px 40px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
 
     .reader-intro h3 {
@@ -128,20 +195,156 @@
       line-height: 1.8;
       text-align: justify;
       margin-bottom: 15px;
-      max-width: 60%;
     }
 
-    .reader-image {
-      width: 35%;
-      max-width: 250px;
-      border-radius: 10px;
+    /* Book Cards */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    .book-card {
+      background: #fff;
+      border-radius: 15px;
       overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
     }
 
-    .reader-image img {
+    .book-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+    }
+
+    .book-image {
       width: 100%;
-      height: auto;
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .book-image img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .book-card:hover .book-image img {
+      transform: scale(1.05);
+    }
+
+    .book-content {
+      padding: 30px;
+    }
+
+    .book-title {
+      font-size: 1.4rem;
+      color: #8B4513;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .book-description {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .book-reflection {
+      font-size: 0.95rem;
+      color: #8B4513;
+      font-style: italic;
+      border-left: 4px solid #f4d03f;
+      padding-left: 15px;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    /* Author Section */
+    .author-section {
+      background: linear-gradient(135deg, #8B4513, #A0522D);
+      color: #fff;
+      padding: 80px 20px;
+    }
+
+    .author-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .author-card {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .author-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.15);
+    }
+
+    .author-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #f4d03f;
+      text-align: center;
+    }
+
+    .author-info {
+      margin-bottom: 20px;
+    }
+
+    .author-info p {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      opacity: 0.9;
+    }
+
+    .author-info strong {
+      color: #f4d03f;
+      font-weight: 600;
+    }
+
+    .author-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.85;
+      text-align: justify;
+    }
+
+    /* Footer */
+    .footer {
+      background: #2c1810;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer p {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Language Control */
+    .lang-hidden {
+      display: none !important;
+    }
+
+    /* Smooth Scrolling */
+    html {
+      scroll-behavior: smooth;
     }
 
   </style>
@@ -167,6 +370,30 @@
     </div>
   </nav>
 
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLanguage('zh')" id="zh-btn">中文</button>
+    <button class="lang-btn" onclick="setLanguage('en')" id="en-btn">English</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 id="hero-title-zh">韵筑和佳勳</h1>
+      <h1 id="hero-title-en" class="lang-hidden">Gini and Frances</h1>
+      <p class="hero-subtitle" id="hero-subtitle-zh">青少年書籍推薦</p>
+      <p class="hero-subtitle lang-hidden" id="hero-subtitle-en">Recommendations for Teenagers' Books</p>
+      <p class="hero-description" id="hero-desc-zh">
+        在書籍的世界裡，每一個故事都像是一杯精心調製的茶，帶著獨特的香氣與回味。<br>
+        六本書，六個人生故事。
+      </p>
+      <p class="hero-description lang-hidden" id="hero-desc-en">
+        In the world of books, every story is like a carefully brewed cup of tea, with its unique aroma and aftertaste.<br>
+        Let's taste the beauty of these words together and feel the warmth and power that reading brings.
+      </p>
+    </div>
+  </section>
+
   <!-- Reader Introduction Section -->
   <section id="readers" class="section">
     <h2 class="section-title" id="readers-title-zh">讀者介紹</h2>
@@ -174,36 +401,30 @@
     <p class="section-subtitle" id="readers-subtitle-zh">韵筑和佳勳</p>
     <p class="section-subtitle lang-hidden" id="readers-subtitle-en">About the Love and Pursuit of Reading</p>
     
-    <!-- Reader 1: 曾韵筑 -->
     <div class="reader-intro">
-      <div class="reader-image">
-        <img src="/mnt/data/5FFDA9E0-E0AC-4BF9-AC8B-826CBF9CB9E4.jpeg" alt="曾韵筑" />
-      </div>
-      <div class="reader-content">
-        <h3 id="reader1-name-zh">曾韵筑</h3>
-        <h3 id="reader1-name-en" class="lang-hidden">Gini</h3>
-        <p id="reader1-intro-zh">
-          我是一位就讀於國立臺東大學英美語文學系的學生，我來自南投的一個小村落。從小就喜歡探索生活中有趣的事物，我的興趣是畫畫和閱讀，我特別喜歡奇幻小說，那些充滿想像力的故事總是能帶給我無限的啟發。當我閱讀時就像進到新的世界一樣去體驗不同的人生。希望能藉由分享這些書籍和心得，讓更多人可以有共鳴，愛上文學的美。
-        </p>
-      </div>
+      <h3 id="reader1-name-zh">曾韵筑</h3>
+      <h3 id="reader1-name-en" class="lang-hidden">Gini</h3>
+      <p id="reader1-intro-zh">
+        我是一位就讀於國立臺東大學英美語文學系的學生，我來自南投的一個小村落。從小就喜歡探索生活中有趣的事物，我的興趣是畫畫和閱讀，我特別喜歡奇幻小說，那些充滿想像力的故事總是能帶給我無限的啟發。當我閱讀時就像進到新的世界一樣去體驗不同的人生。希望能藉由分享這些書籍和心得，讓更多人可以有共鳴，愛上文學的美。
+      </p>
+      <p id="reader1-intro-en" class="lang-hidden">
+        I am a student studying in the Department of English and American Literature at National Taitung University, with a deep love for literature. I have been immersed in the world of books since childhood, especially fantasy novels, whose imaginative stories always bring me endless inspiration. Reading is not only my interest but also an important way for me to understand the world and explore human nature. Each book is like a window that allows me to see different worlds and experience different lives. By sharing these precious reading experiences, I hope to feel the power of words together with more people and find our own touch in the sea of books.
+      </p>
     </div>
     
-    <!-- Reader 2: 葉佳勳 -->
     <div class="reader-intro">
-      <div class="reader-image">
-        <img src="/mnt/data/A5B74036-915A-4F4E-9F03-54CF82F5675A.jpeg" alt="葉佳勳" />
-      </div>
-      <div class="reader-content">
-        <h3 id="reader2-name-zh">葉佳勳</h3>
-        <h3 id="reader2-name-en" class="lang-hidden">Frances</h3>
-        <p id="reader2-intro-zh">
-          大家好~我是佳勳，也可以叫我Frances，就讀於台東大學英美語文學系。我的個性沉穩內斂，一直以來都熱愛閱讀。透過系上豐富多元的文學課程，我對文學作品及其人性方面的研究產生了濃厚的興趣。我希望在這個領域繼續學習和成長，進一步探索文學的深度和美感。
-        </p>
-      </div>
+      <h3 id="reader2-name-zh">葉佳勳</h3>
+      <h3 id="reader2-name-en" class="lang-hidden">Frances</h3>
+      <p id="reader2-intro-zh">
+        大家好~我是佳勳，也可以叫我Frances，就讀於台東大學英美語文學系。我的個性沉穩內斂，一直以來都熱愛閱讀。透過系上豐富多元的文學課程，我對文學作品及其人性方面的研究產生了濃厚的興趣。我希望在這個領域繼續學習和成長，進一步探索文學的深度和美感。
+      </p>
+      <p id="reader2-intro-en" class="lang-hidden">
+        Hello~ my name is Frances. I am a student in the Department of English at National Taitung University. With a calm and introspective personality, I have always enjoyed reading. Through the department's diverse and enriching literature courses, I have developed a deep interest in literary works and the ways they reflect human experience. I hope to continue learning and growing in this field, further exploring the depth and beauty of literature.
+      </p>
     </div>
   </section>
 
-<!-- Books Section -->
+  <!-- Books Section -->
   <section id="books" class="section">
     <h2 class="section-title" id="books-title-zh">書籍介紹</h2>
     <h2 class="section-title lang-hidden" id="books-title-en">Book Introduction</h2>
