@@ -171,6 +171,32 @@
       font-weight: 300;
     }
 
+    /* Reader Introduction Styles */
+    .reader-intro {
+      background: #fff;
+      border-radius: 15px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      margin: 0 20px 40px 20px;
+    }
+
+    .reader-intro h3 {
+      font-size: 1.8rem;
+      color: #8B4513;
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .reader-intro p {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.8;
+      text-align: justify;
+      margin-bottom: 15px;
+    }
+
     /* Book Cards */
     .books-grid {
       display: grid;
@@ -245,35 +271,57 @@
       background: linear-gradient(135deg, #8B4513, #A0522D);
       color: #fff;
       padding: 80px 20px;
-      text-align: center;
     }
 
     .author-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 40px;
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
     .author-card {
       background: rgba(255,255,255,0.1);
-      padding: 40px;
+      padding: 30px;
       border-radius: 15px;
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .author-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.15);
     }
 
     .author-card h3 {
       font-size: 1.5rem;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       color: #f4d03f;
+      text-align: center;
     }
 
-    .author-card p {
-      font-size: 1rem;
-      line-height: 1.7;
+    .author-info {
+      margin-bottom: 20px;
+    }
+
+    .author-info p {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
       opacity: 0.9;
+    }
+
+    .author-info strong {
+      color: #f4d03f;
+      font-weight: 600;
+    }
+
+    .author-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.85;
+      text-align: justify;
     }
 
     /* Footer */
@@ -331,7 +379,7 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <h1 id="hero-title-zh"></h1>
+      <h1 id="hero-title-zh">韵筑和佳勳</h1>
       <h1 id="hero-title-en" class="lang-hidden">Gini and Frances</h1>
       <p class="hero-subtitle" id="hero-subtitle-zh">青少年書籍推薦</p>
       <p class="hero-subtitle lang-hidden" id="hero-subtitle-en">Recommendations for Teenagers' Books</p>
@@ -354,29 +402,27 @@
     <p class="section-subtitle lang-hidden" id="readers-subtitle-en">About the Love and Pursuit of Reading</p>
     
     <div class="reader-intro">
-      <h3 id="reader-name-zh">曾韵筑</h3>
-      <h3 id="reader-name-en" class="lang-hidden">Gini</h3>
-      <p id="reader-intro-zh">
+      <h3 id="reader1-name-zh">曾韵筑</h3>
+      <h3 id="reader1-name-en" class="lang-hidden">Gini</h3>
+      <p id="reader1-intro-zh">
         我是一位就讀於國立臺東大學英美語文學系的學生，我來自南投的一個小村落。從小就喜歡探索生活中有趣的事物，我的興趣是畫畫和閱讀，我特別喜歡奇幻小說，那些充滿想像力的故事總是能帶給我無限的啟發。當我閱讀時就像進到新的世界一樣去體驗不同的人生。希望能藉由分享這些書籍和心得，讓更多人可以有共鳴，愛上文學的美。
       </p>
-      <p id="reader-intro-en" class="lang-hidden">
+      <p id="reader1-intro-en" class="lang-hidden">
         I am a student studying in the Department of English and American Literature at National Taitung University, with a deep love for literature. I have been immersed in the world of books since childhood, especially fantasy novels, whose imaginative stories always bring me endless inspiration. Reading is not only my interest but also an important way for me to understand the world and explore human nature. Each book is like a window that allows me to see different worlds and experience different lives. By sharing these precious reading experiences, I hope to feel the power of words together with more people and find our own touch in the sea of books.
       </p>
     </div>
-  </section>
     
     <div class="reader-intro">
-      <h3 id="reader-name-zh">葉佳勳</h3>
-      <h3 id="reader-name-en" class="lang-hidden">Gini</h3>
-      <p id="reader-intro-zh">
+      <h3 id="reader2-name-zh">葉佳勳</h3>
+      <h3 id="reader2-name-en" class="lang-hidden">Frances</h3>
+      <p id="reader2-intro-zh">
         大家好~我是佳勳，也可以叫我Frances，就讀於台東大學英美語文學系。我的個性沉穩內斂，一直以來都熱愛閱讀。透過系上豐富多元的文學課程，我對文學作品及其人性方面的研究產生了濃厚的興趣。我希望在這個領域繼續學習和成長，進一步探索文學的深度和美感。
       </p>
-      <p id="reader-intro-en" class="lang-hidden">
-        Hello~ my name is Frances. I am a student in the Department of English at National Taitung University. With a calm and introspective personality, I have always enjoyed reading. Through the department’s diverse and enriching literature courses, I have developed a deep interest in literary works and the ways they reflect human experience. I hope to continue learning and growing in this field, further exploring the depth and beauty of literature.
+      <p id="reader2-intro-en" class="lang-hidden">
+        Hello~ my name is Frances. I am a student in the Department of English at National Taitung University. With a calm and introspective personality, I have always enjoyed reading. Through the department's diverse and enriching literature courses, I have developed a deep interest in literary works and the ways they reflect human experience. I hope to continue learning and growing in this field, further exploring the depth and beauty of literature.
       </p>
     </div>
   </section>
-
 
   <!-- Books Section -->
   <section id="books" class="section">
@@ -408,7 +454,7 @@
             <p id="book1-reflect-zh"><strong>推薦語：</strong>結構如同《飢餓遊戲》，揭示階級制度的荒謬與現實。</p>
             <p class="lang-hidden" id="book1-reflect-en"><strong>Reflection:</strong> After I watched The Hunger Games, I found that their story structures are very similar. The court competition is like a reality show of survival. Every woman wants to win the favor of the prince. And the power of the whole country is in the hands of the royal family. When I am a reader, I realize how bad this system is. But when it really happens, we don't realize that we are also a contestant.
 
-I highly recommend everyone to read this book. Although most people may not like the love story, I think the author’s portrayal of their entanglements and predicaments is very touching.</p>
+I highly recommend everyone to read this book. Although most people may not like the love story, I think the author's portrayal of their entanglements and predicaments is very touching.</p>
           </div>
         </div>
       </div>
@@ -433,7 +479,7 @@ I highly recommend everyone to read this book. Although most people may not like
             <p id="book2-reflect-zh"><strong>推薦語：</strong>"當你真心渴望某樣東西時，整個宇宙都會聯合起來幫助你。"</p>
             <p class="lang-hidden" id="book2-reflect-en"><strong>Reflection:</strong> This book will inspire you in different ways at different stages of life. When I read it in middle school, I thought it was very abstract, not because the text was difficult, but because its life insights can only be understood after enough life experience. Unlike Coraline, you will be inspired when you read it as a child. I think the reason why this book is so powerful is that after you finish reading it, you will understand more as you grow older.
 
-“When you want something, all the universe conspires in helping you to achieve it.” This is the most famous sentence in the book. I think when you feel confused about life, you might as well open this book, it will give you inspiration.</p>
+"When you want something, all the universe conspires in helping you to achieve it." This is the most famous sentence in the book. I think when you feel confused about life, you might as well open this book, it will give you inspiration.</p>
           </div>
         </div>
       </div>
@@ -460,114 +506,67 @@ I highly recommend everyone to read this book. Although most people may not like
           </div>
         </div>
       </div>
-<!-- Book 4: Coraline -->
+
+      <!-- Book 4: Coraline -->
       <div class="book-card">
         <div class="book-image">
-          <a href="#book3" class="book-link">
-            <img src="https://m.media-amazon.com/images/I/61JfGcL2ljL.jpg" alt="The Hunger Games" />
+          <a href="#book4" class="book-link">
+            <img src="https://m.media-amazon.com/images/I/81S5dXjGb9L.jpg" alt="Coraline" />
           </a>
         </div>
         <div class="book-content">
-          <h3 class="book-title" id="book3-title-zh">鬼媽媽</h3>
-          <h3 class="book-title lang-hidden" id="book3-title-en">Coraline – Neil Gaiman </h3>
-          <p class="book-description" id="book3-desc-zh">
+          <h3 class="book-title" id="book4-title-zh">《鬼媽媽》– 尼爾．蓋曼</h3>
+          <h3 class="book-title lang-hidden" id="book4-title-en">Coraline – Neil Gaiman</h3>
+          <p class="book-description" id="book4-desc-zh">
             卡洛琳一直缺乏成年人的陪伴。她很難理解成年人的行為。卡洛琳和其他孩子一樣，渴望父母的關愛。她希望每個人都能珍惜自己，而不是敷衍地對待她。因為沒有人關心她，沒有人引導她，卡洛琳總是獨自去冒險。正因如此，卡洛琳打開了那扇無法打開的門。
           </p>
-          <p class="book-description lang-hidden" id="book3-desc-en">
-           Coraline has always lacked the company of adults. Coraline finds it is hard to understand adult’s behaviors. Coraline is just like any other child, she desires the care and affection from her parents. She hopes that everyone can value herself instead of treating her perfunctorily. Because no one cared about her or guided her, Coraline always went on adventures alone. That's why Coraline opened the door that cannot be opened.
+          <p class="book-description lang-hidden" id="book4-desc-en">
+           Coraline has always lacked the company of adults. Coraline finds it is hard to understand adult's behaviors. Coraline is just like any other child, she desires the care and affection from her parents. She hopes that everyone can value herself instead of treating her perfunctorily. Because no one cared about her or guided her, Coraline always went on adventures alone. That's why Coraline opened the door that cannot be opened.
           </p>
           <div class="book-reflection">
-            <p id="book3-reflect-zh"><strong>推薦語：</strong>童年不該是寂寞無趣的。</p>
-            <p class="lang-hidden" id="book3-reflect-en"><strong>Reflection:</strong> When I was about the same age as Coraline, I spent it at my grandma's house. Because both my parents are working, no one can take care of me except my grandma. I'm just like Coraline, curious about everything, and often go to the neighbor's tobacco house to explore. I also usually go to the path in the back garden. After watching Totoro, I always imagine being able to enter a fantasy world. When children lack real company, they always look for external things. If adults can put themselves in the children's shoes. Communicating with children from a child's perspective will be better for both sides. I think there is nothing wrong with children being curious. Sometimes children just need the company of adults, but adults keep blaming children for making mistakes. Everyone was once a child, and children should be allowed to explore the world. Parents should also provide companionship and support.</p>
+            <p id="book4-reflect-zh"><strong>推薦語：</strong>童年不該是寂寞無趣的。</p>
+            <p class="lang-hidden" id="book4-reflect-en"><strong>Reflection:</strong> When I was about the same age as Coraline, I spent it at my grandma's house. Because both my parents are working, no one can take care of me except my grandma. I'm just like Coraline, curious about everything, and often go to the neighbor's tobacco house to explore. I also usually go to the path in the back garden. After watching Totoro, I always imagine being able to enter a fantasy world. When children lack real company, they always look for external things. If adults can put themselves in the children's shoes. Communicating with children from a child's perspective will be better for both sides. I think there is nothing wrong with children being curious. Sometimes children just need the company of adults, but adults keep blaming children for making mistakes. Everyone was once a child, and children should be allowed to explore the world. Parents should also provide companionship and support.</p>
           </div>
         </div>
       </div>
-<!-- Book 5: Coraline -->
+
+      <!-- Book 5: The Book Thief -->
       <div class="book-card">
         <div class="book-image">
-          <a href="#book3" class="book-link">
-            <img src="https://m.media-amazon.com/images/I/61JfGcL2ljL.jpg" alt="The Hunger Games" />
+          <a href="#book5" class="book-link">
+            <img src="https://m.media-amazon.com/images/I/81vOZ0gBTfL.jpg" alt="The Book Thief" />
           </a>
         </div>
         <div class="book-content">
-          <h3 class="book-title" id="book3-title-zh">偷書賊</h3>
-          <h3 class="book-title lang-hidden" id="book3-title-en">The Book Thief 偷書賊 – Markus Zusak</h3>
-          <p class="book-description" id="book3-desc-zh">
+          <h3 class="book-title" id="book5-title-zh">《偷書賊》– 馬克斯．蘇薩克</h3>
+          <h3 class="book-title lang-hidden" id="book5-title-en">The Book Thief – Markus Zusak</h3>
+          <p class="book-description" id="book5-desc-zh">
             這是一個關於一個女孩如何在貧困和戰亂中掙扎的故事，她透過閱讀，在如此嚴酷的境遇中，保持內心的希望和能量。除了保持內心的堅強，我們也看到她如何運用閱讀的力量，為身邊需要精神支持的人帶來溫暖的希望和力量。
           </p>
-          <p class="book-description lang-hidden" id="book3-desc-en">
+          <p class="book-description lang-hidden" id="book5-desc-en">
            This is a story about how a girl lives in poverty and war, and how she keeps her mind with hope and energy in such a harsh situation through reading. In addition to keeping her mind strong, we can also see that she uses the power of reading to bring warmth to those around her who require mental support…
           </p>
           <div class="book-reflection">
-            <p id="book3-reflect-zh"><strong>推薦語：</strong> “I have hated the words and I have loved them, and I hope I have made them right.我曾厭惡過這些話，也曾經接受過，我希望我已經正確地理解了它們。</p>
-            <p class="lang-hidden" id="book3-reflect-en"><strong>Reflection:</strong> After reading the book, I realized that it was the first time I truly felt the power of words. As the girl grew up, all the words she learned became her weapons, protecting her and helping her maintain inner peace. Even in our generation, it’s hard to keep your mind away from the noises, not to mention in a situation like hers. This story made me start believing in the power of words and inspired me to acquire more, in the hope of finding my own inner peace.</p>
+            <p id="book5-reflect-zh"><strong>推薦語：</strong> "I have hated the words and I have loved them, and I hope I have made them right.我曾厭惡過這些話，也曾經接受過，我希望我已經正確地理解了它們。</p>
+            <p class="lang-hidden" id="book5-reflect-en"><strong>Reflection:</strong> After reading the book, I realized that it was the first time I truly felt the power of words. As the girl grew up, all the words she learned became her weapons, protecting her and helping her maintain inner peace. Even in our generation, it's hard to keep your mind away from the noises, not to mention in a situation like hers. This story made me start believing in the power of words and inspired me to acquire more, in the hope of finding my own inner peace.</p>
           </div>
         </div>
       </div>
 
-<!-- Book 6: Frankenstein  -->
+      <!-- Book 6: Frankenstein -->
       <div class="book-card">
         <div class="book-image">
-          <a href="#book3" class="book-link">
-            <img src="https://m.media-amazon.com/images/I/61JfGcL2ljL.jpg" alt="The Hunger Games" />
+          <a href="#book6" class="book-link">
+            <img src="https://m.media-amazon.com/images/I/71V1yD5UdXL.jpg" alt="Frankenstein" />
           </a>
         </div>
         <div class="book-content">
-          <h3 class="book-title" id="book3-title-zh">科學怪人</h3>
-          <h3 class="book-title lang-hidden" id="book3-title-en">Frankenstein – Mary Shelley</h3>
-          <p class="book-description" id="book3-desc-zh">
+          <h3 class="book-title" id="book6-title-zh">《科學怪人》– 瑪麗．雪萊</h3>
+          <h3 class="book-title lang-hidden" id="book6-title-en">Frankenstein – Mary Shelley</h3>
+          <p class="book-description" id="book6-desc-zh">
             這是一個關於一位科學家試圖將他的實驗變成現實，最終釀成悲劇的故事。他因為自己的野心，創造了一個真實的怪物。雖然最終他感到後悔，但一切都已經發生，無法挽回。
           </p>
-          <p class="book-description lang-hidden" id="book3-desc-en">
-           This is a story about a scientist who tries to turn his experiment into reality, which ultimately results in a serious tragedy. Because of his ambition, he creates a real-life monster. Although he feels regretful in the end, but everything has already changed and become irretrievable.
-          </p>
-          <div class="book-reflection">
-            <p id="book3-reflect-zh"><strong>推薦語：</strong>  “Learn from me, if not by my precepts, at least by my example, how dangerous is the acquirement of knowledge.”</p>
-            <p class="lang-hidden" id="book3-reflect-en"><strong>Reflection:</strong> I learn how important it is to  control our desires and take responsibility for the mistakes we’ve made through this novel. I felt that the entire tragedy in the story came from the scientist’s desire. When things got out of control, he just chose to give up and responded with apathy. I believe that if he had at least thought about his family and the situation of the monster he created, the result would not be that bad. Everything the scientist went through offers important lessons that we should reflect on in our own lives.</p>
-          </div>
-        </div>
-      </div>
-      <!-- Add Books 4-6 similarly -->
-      
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact" class="footer">
-    <div class="section">
-      <p id="footer-zh">&copy; 青少年文學 曾韵筑 葉佳勳 </p>
-      <p class="lang-hidden" id="footer-en">&copy; 2025 06 11 | Book  | Taitung University</p>
-    </div>
-  </footer>
-
-  <script>
-    function setLanguage(lang) {
-      // 移除所有按鈕的 active 類別
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      
-      // 為當前語言按鈕添加 active 類別
-      document.getElementById(lang + '-btn').classList.add('active');
-      
-      // 隱藏所有語言元素
-      document.querySelectorAll('[id*="-en"], [id*="-zh"]').forEach(el => {
-        el.classList.add('lang-hidden');
-      });
-      
-      // 顯示選擇的語言
-      document.querySelectorAll('[id*="-' + lang + '"]').forEach(el => {
-        el.classList.remove('lang-hidden');
-      });
-    }
-    
-    // 頁面載入完成後設定預設語言
-    window.addEventListener('load', function() {
-      setLanguage('zh');
-    });
-  </script>
-
-</body>
-</html>
+          <p class="book-description lang-hidden" id="book6-desc-en">
+           This is a story
 
 
