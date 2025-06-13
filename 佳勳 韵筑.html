@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recommendations for Teenagers' Books</title>
-    <title>Gini, Frances</title>
     <style>
         * {
             margin: 0;
@@ -24,6 +23,158 @@
             max-width: 900px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Music Player Styles */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(139, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            color: white;
+            min-width: 320px;
+            transition: transform 0.3s ease;
+        }
+
+        .music-player.minimized {
+            transform: translateY(-75%);
+        }
+
+        .music-player:hover.minimized {
+            transform: translateY(0);
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .player-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .minimize-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            border-radius: 3px;
+            transition: background 0.3s ease;
+        }
+
+        .minimize-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .current-song {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            outline: none;
+            appearance: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .playlist {
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .playlist-item {
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .playlist-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .playlist-item.active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .youtube-embed {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin-top: 10px;
         }
 
         header {
@@ -120,18 +271,6 @@
             width: 100%;
             height: 4px;
             background: linear-gradient(to right, #8B0000, #B22222);
-        }
-
-        .author-content {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
-        .author-text {
-            flex: 1;
-            min-width: 300px;
         }
 
         .author-name {
@@ -314,6 +453,14 @@
         }
 
         @media (max-width: 768px) {
+            .music-player {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 20px;
+                min-width: auto;
+            }
+            
             h1 {
                 font-size: 2.2rem;
             }
@@ -337,6 +484,54 @@
     </style>
 </head>
 <body>
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-header" onclick="toggleMinimize()">
+            <div class="player-title">🎵 Reading Music 閱讀配樂</div>
+            <button class="minimize-btn" id="minimizeBtn">−</button>
+        </div>
+        
+        <div class="player-content" id="playerContent">
+            <div class="current-song" id="currentSong">Perfect Reading Piano Music</div>
+            
+            <div class="player-controls">
+                <button class="control-btn" onclick="previousSong()">⏮</button>
+                <button class="control-btn play-btn" onclick="togglePlay()" id="playBtn">▶</button>
+                <button class="control-btn" onclick="nextSong()">⏭</button>
+            </div>
+            
+            <div class="volume-control">
+                <span>🔊</span>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30">
+            </div>
+            
+            <div class="playlist" id="playlist">
+                <div class="playlist-item active" data-video="Y9T7Rm9dXxc">
+                    <span>🎹 Perfect Piano Study Music</span>
+                    <span>3:00:00</span>
+                </div>
+                <div class="playlist-item" data-video="jfKfPfyJRdk">
+                    <span>🌙 Peaceful Piano for Reading</span>
+                    <span>2:30:00</span>
+                </div>
+                <div class="playlist-item" data-video="lFcSrYw-ARY">
+                    <span>☕ Coffee Shop Piano</span>
+                    <span>1:45:00</span>
+                </div>
+            </div>
+            
+            <!-- YouTube Embed -->
+            <iframe 
+                class="youtube-embed" 
+                id="youtubePlayer"
+                src="https://www.youtube.com/embed/Y9T7Rm9dXxc?enablejsapi=1&autoplay=0&loop=1&playlist=Y9T7Rm9dXxc"
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <h1>Recommendations for Teenagers' Books- Six books. Six stories.</h1>
@@ -407,7 +602,7 @@
             <div class="book-author-card">
                 <h3 class="book-author-name">Mary Shelley</h3>
                 <p class="book-author-dates">August 30, 1797 – February 1, 1851</p>
-                <p class="book-author-bio">Mary Wollstonecraft Shelley was an English novelist best known for her Gothic novel Frankenstein, widely considered one of the first works of science fiction. Born in London, she was the daughter of political philosopher William Godwin and feminist writer Mary Wollstonecraft. Tragically, her mother died shortly after her birth. At age 16, she began a relationship with the Romantic poet Percy Bysshe Shelley, whom she later married. The idea for Frankenstein came to her during the famous summer of 1816 at Lake Geneva, when she, Percy Shelley, Lord Byron, and others challenged each other to write ghost stories. She was only 18 when she began writing Frankenstein, which was published anonymously in 1818. The novel explores themes of scientific ethics, creation and responsibility, and the nature of humanity itself. Shelley's work was groundbreaking not only for its innovative genre-blending but also for its complex moral and philosophical questions that remain relevant today. Beyond Frankenstein, she wrote several other novels and worked to preserve and promote her late husband's poetry after his death in 1822.</p>
+                <p class="book-author-bio">Mary Wollstonecraft Shelley was an English novelist best known for her Gothic novel Frankenstein, widely considered one of the first works of science fiction. Born in London, she was the daughter of political philosopher William Godwin and feminist writer Mary Wollstonecraft. Tragically, her mother died shortly after her birth. At age 16, she began a relationship with the Romantic poet Percy Bysshe Shelley, whom she later married. The idea for Frankenstein came to her during the famous summer of 1816 at Lake Geneva, when she, Percy Shelley, Lord Byron, and others challenged each other to write ghost stories. She was only 18 when she began writing Frankenstein, which was published anonymously in 1818. The novel explores themes of scientific ethics, creation and responsibility, and the nature of humanity itself. Shelley's work was groundbreaking not only for its innovative genre-blending but also for its complex moral and philosophical questions that remain relevant today. Beyond Frankenstein, she wrote several other novels and worked to preserve and promote her late husband's poetry after her death in 1822.</p>
             </div>
         </div>
     </section>
@@ -453,25 +648,4 @@
                     <h3 class="book-title">The Book Thief</h3>
                     <p class="book-author">by Markus Zusak</p>
                     <p class="book-description">This is a story about how a girl lives in poverty and war, and how she keeps her mind with hope and energy in such a harsh situation through reading. In addition to keeping her mind strong, we can also see that she uses the power of reading to bring warmth to those around her who require mental support.</p>
-                    <div class="book-quote">"I have hated the words and I have loved them, and I hope I have made them right."</div>
-                    <p class="book-reflection">After reading the book, I realized that it was the first time I truly felt the power of words. As the girl grew up, all the words she learned became her weapons, protecting her and helping her maintain inner peace. This story made me start believing in the power of words and inspired me to acquire more, in the hope of finding my own inner peace.</p>
-                </div>
-
-                <div class="book-card">
-                    <h3 class="book-title">Frankenstein</h3>
-                    <p class="book-author">by Mary Shelley</p>
-                    <p class="book-description">This is a story about a scientist who tries to turn his experiment into reality, which ultimately results in a serious tragedy. Because of his ambition, he creates a real-life monster. Although he feels regretful in the end, but everything has already changed and become irretrievable.</p>
-                    <div class="book-quote">"Learn from me, if not by my precepts, at least by my example, how dangerous is the acquirement of knowledge."</div>
-                    <p class="book-reflection">I learn how important it is to control our desires and take responsibility for the mistakes we've made through this novel. I felt that the entire tragedy in the story came from the scientist's desire. Everything the scientist went through offers important lessons that we should reflect on in our own lives.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p class="footer-text">Let's taste the beauty of these words together and feel the warmth and power that reading brings.</p>
-        </div>
-    </footer>
-</body>
-</html>
+                    <div class="book-quote">"I have hated the words and I have loved them, and I hope I have made them
